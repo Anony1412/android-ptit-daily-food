@@ -1,4 +1,4 @@
-package com.example.daily_food_ptit;
+package com.ptit.daily_food;
 
 import org.junit.Test;
 
