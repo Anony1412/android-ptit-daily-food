@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.example.daily_food_ptit"
+        applicationId "com.ptit.daily_food"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1

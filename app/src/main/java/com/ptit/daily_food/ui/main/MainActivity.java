@@ -1,8 +1,10 @@
-package com.example.daily_food_ptit;
+package com.ptit.daily_food.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.ptit.daily_food.R;
 
 public class MainActivity extends AppCompatActivity {
 

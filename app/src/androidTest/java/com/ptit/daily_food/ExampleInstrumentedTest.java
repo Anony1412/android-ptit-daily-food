@@ -1,4 +1,4 @@
-package com.example.daily_food_ptit;
+package com.ptit.daily_food;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.daily_food_ptit", appContext.getPackageName());
+        assertEquals("com.ptit.daily_food", appContext.getPackageName());
     }
 }
