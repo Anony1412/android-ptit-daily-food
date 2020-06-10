@@ -18,6 +18,18 @@ public class FoodDetail {
     private static final String JSON_KEY_INSTRUCTIONS = "analyzedInstructions";
     private static final String JSON_KEY_STEPS = "steps";
 
+    public static final String TABLE_NAME = "tbl_food";
+    public static final String ID = "food_id";
+    public static final String TITLE = "food_title";
+    public static final String PRICE = "food_price";
+    public static final String READY_MINUTES = "food_ready_minutes";
+    public static final String SUMMARY = "food_summary";
+    public static final String IMAGE_URL = "food_image_url";
+    public static final String TYPE_FAVORITE = "is_favorite";
+    public static final String TYPE_FAMILY = "is_family";
+    public static final String TYPE_PARTY = "is_party";
+    public static final String STATE_IS_COOKING = "is_cooking";
+
     private String id = "";
     private String title = "";
     private String price = "";
