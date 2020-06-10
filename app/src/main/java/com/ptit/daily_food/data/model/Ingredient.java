@@ -8,6 +8,10 @@ public class Ingredient {
     private static final String JSON_KEY_NAME = "name";
     private static final String JSON_KEY_ORIGINAL = "original";
 
+    public static final String TABLE_NAME = "tbl_ingredient";
+    public static final String ID = "ingredient_id";
+    public static final String ORIGINAL = "ingredient_original";
+
     private String id = "";
     private String name = "";
     private String original = "";
