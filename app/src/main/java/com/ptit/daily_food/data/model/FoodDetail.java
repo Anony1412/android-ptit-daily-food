@@ -1,5 +1,11 @@
 package com.ptit.daily_food.data.model;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+
+import com.ptit.daily_food.data.source.local.dao.FoodDao;
+import com.ptit.daily_food.data.source.local.dao.FoodDaoImpl;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -48,6 +54,15 @@ public class FoodDetail {
         this.imageUrl = jsonObject.optString(JSON_KEY_IMAGE);
         this.ingredients = getIngredient(jsonObject);
         this.instructions = getInstructions(jsonObject);
+    }
+
+    public FoodDetail(Cursor cursor) {
+        this.id = cursor.getString(cursor.getColumnIndex(ID));
+        this.title = cursor.getString(cursor.getColumnIndex(TITLE));
+        this.price = cursor.getString(cursor.getColumnIndex(PRICE));
+        this.readyMinutes = cursor.getString(cursor.getColumnIndex(READY_MINUTES));
+        this.summary = cursor.getString(cursor.getColumnIndex(SUMMARY));
+        this.imageUrl = cursor.getString(cursor.getColumnIndex(IMAGE_URL));
     }
 
     private List<Instruction> getInstructions(JSONObject jsonObject) {
@@ -110,5 +125,37 @@ public class FoodDetail {
 
     public List<Instruction> getInstructions() {
         return instructions;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public void setReadyMinutes(String readyMinutes) {
+        this.readyMinutes = readyMinutes;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void setInstructions(List<Instruction> instructions) {
+        this.instructions = instructions;
     }
 }

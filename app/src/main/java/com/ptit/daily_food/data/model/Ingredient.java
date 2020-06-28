@@ -22,6 +22,10 @@ public class Ingredient {
         this.original = jsonObject.optString(JSON_KEY_ORIGINAL);
     }
 
+    public Ingredient(String original) {
+        this.original = original;
+    }
+
     public String getId() {
         return id;
     }
