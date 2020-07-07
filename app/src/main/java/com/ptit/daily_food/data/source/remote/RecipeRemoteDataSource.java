@@ -20,4 +20,8 @@ public class RecipeRemoteDataSource implements RecipeDataSource.Remote {
         GetResponseAsync async = new GetResponseAsync(new RecipeResponseHandler(), callback);
         async.execute(urlRequest);
     }
+
+    public static RecipeRemoteDataSource getInstance() {
+        return new RecipeRemoteDataSource();
+    }
 }

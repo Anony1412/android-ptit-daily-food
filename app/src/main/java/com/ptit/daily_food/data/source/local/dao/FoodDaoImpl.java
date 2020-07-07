@@ -26,6 +26,10 @@ public class FoodDaoImpl implements FoodDao {
         database = this.foodDailyDatabase.getWritableDatabase();
     }
 
+    public static FoodDao getInstance(FoodDailyDatabase foodDailyDatabase) {
+        return new FoodDaoImpl(foodDailyDatabase);
+    }
+
     @Override
     public ArrayList<FoodDetail> getAllFavoriteFoods() {
         return getAllFoodsByCollection(FoodDetail.TYPE_FAVORITE);

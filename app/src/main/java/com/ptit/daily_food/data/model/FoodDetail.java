@@ -1,10 +1,8 @@
 package com.ptit.daily_food.data.model;
 
-import android.content.ContentValues;
 import android.database.Cursor;
-
-import com.ptit.daily_food.data.source.local.dao.FoodDao;
-import com.ptit.daily_food.data.source.local.dao.FoodDaoImpl;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,17 +10,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FoodDetail {
-
-    private static final String JSON_KEY_ID = "id";
-    private static final String JSON_KEY_TITLE = "title";
-    private static final String JSON_KEY_PRICE = "pricePerServing";
-    private static final String JSON_KEY_READY_MINUTES = "readyInMinutes";
-    private static final String JSON_KEY_SUMMARY = "summary";
-    private static final String JSON_KEY_IMAGE = "image";
-    private static final String JSON_KEY_INGREDIENTS = "extendedIngredients";
-    private static final String JSON_KEY_INSTRUCTIONS = "analyzedInstructions";
-    private static final String JSON_KEY_STEPS = "steps";
+public class FoodDetail implements Parcelable {
 
     public static final String TABLE_NAME = "tbl_food";
     public static final String ID = "food_id";
@@ -35,7 +23,26 @@ public class FoodDetail {
     public static final String TYPE_FAMILY = "is_family";
     public static final String TYPE_PARTY = "is_party";
     public static final String STATE_IS_COOKING = "is_cooking";
+    public static final Creator<FoodDetail> CREATOR = new Creator<FoodDetail>() {
+        @Override
+        public FoodDetail createFromParcel(Parcel in) {
+            return new FoodDetail(in);
+        }
 
+        @Override
+        public FoodDetail[] newArray(int size) {
+            return new FoodDetail[size];
+        }
+    };
+    private static final String JSON_KEY_ID = "id";
+    private static final String JSON_KEY_TITLE = "title";
+    private static final String JSON_KEY_PRICE = "pricePerServing";
+    private static final String JSON_KEY_READY_MINUTES = "readyInMinutes";
+    private static final String JSON_KEY_SUMMARY = "summary";
+    private static final String JSON_KEY_IMAGE = "image";
+    private static final String JSON_KEY_INGREDIENTS = "extendedIngredients";
+    private static final String JSON_KEY_INSTRUCTIONS = "analyzedInstructions";
+    private static final String JSON_KEY_STEPS = "steps";
     private String id = "";
     private String title = "";
     private String price = "";
@@ -63,6 +70,15 @@ public class FoodDetail {
         this.readyMinutes = cursor.getString(cursor.getColumnIndex(READY_MINUTES));
         this.summary = cursor.getString(cursor.getColumnIndex(SUMMARY));
         this.imageUrl = cursor.getString(cursor.getColumnIndex(IMAGE_URL));
+    }
+
+    protected FoodDetail(Parcel in) {
+        id = in.readString();
+        title = in.readString();
+        price = in.readString();
+        readyMinutes = in.readString();
+        summary = in.readString();
+        imageUrl = in.readString();
     }
 
     private List<Instruction> getInstructions(JSONObject jsonObject) {
@@ -95,67 +111,98 @@ public class FoodDetail {
         return ingredients;
     }
 
+    public String getRequiredTime() {
+        return this.readyMinutes + " minutes";
+    }
+
+    public String getPriceEstimate() {
+        return this.price + " $";
+    }
+
+    public String getIngredient() {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < this.ingredients.size(); i++) {
+            result.append("-").append(this.ingredients).append("\n");
+        }
+        return result.toString();
+    }
+
     public String getId() {
         return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public String getReadyMinutes() {
-        return readyMinutes;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public List<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public List<Instruction> getInstructions() {
-        return instructions;
     }
 
     public void setId(String id) {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getPrice() {
+        return price;
     }
 
     public void setPrice(String price) {
         this.price = price;
     }
 
+    public String getReadyMinutes() {
+        return readyMinutes;
+    }
+
     public void setReadyMinutes(String readyMinutes) {
         this.readyMinutes = readyMinutes;
+    }
+
+    public String getSummary() {
+        return summary;
     }
 
     public void setSummary(String summary) {
         this.summary = summary;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
+    public List<Instruction> getInstructions() {
+        return instructions;
+    }
+
     public void setInstructions(List<Instruction> instructions) {
         this.instructions = instructions;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(title);
+        dest.writeString(price);
+        dest.writeString(readyMinutes);
+        dest.writeString(summary);
+        dest.writeString(imageUrl);
     }
 }
