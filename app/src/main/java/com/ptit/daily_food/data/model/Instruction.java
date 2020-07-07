@@ -1,10 +1,12 @@
 package com.ptit.daily_food.data.model;
 
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import org.json.JSONObject;
 
-public class Instruction {
+public class Instruction implements Parcelable {
 
     public static final String TABLE_NAME = "tbl_instruction";
     public static final String ID = "instruction_id";
@@ -32,6 +34,29 @@ public class Instruction {
         this.step = cursor.getString(cursor.getColumnIndex(STEP));
         this.imageInstruction = cursor.getString(cursor.getColumnIndex(IMAGE_INSTRUCTION));
         this.imageIngredient = cursor.getString(cursor.getColumnIndex(IMAGE_INGREDIENT));
+    }
+
+    protected Instruction(Parcel in) {
+        step = in.readString();
+        number = in.readString();
+        imageInstruction = in.readString();
+        imageIngredient = in.readString();
+    }
+
+    public static final Creator<Instruction> CREATOR = new Creator<Instruction>() {
+        @Override
+        public Instruction createFromParcel(Parcel in) {
+            return new Instruction(in);
+        }
+
+        @Override
+        public Instruction[] newArray(int size) {
+            return new Instruction[size];
+        }
+    };
+
+    public String getStepNumber() {
+        return "Step " + this.number;
     }
 
     public String getStep() {
@@ -64,5 +89,18 @@ public class Instruction {
 
     public void setImageIngredient(String imageIngredient) {
         this.imageIngredient = imageIngredient;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(step);
+        dest.writeString(number);
+        dest.writeString(imageInstruction);
+        dest.writeString(imageIngredient);
     }
 }

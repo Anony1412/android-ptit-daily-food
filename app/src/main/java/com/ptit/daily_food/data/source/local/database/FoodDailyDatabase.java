@@ -74,4 +74,8 @@ public class FoodDailyDatabase extends SQLiteOpenHelper {
         db.execSQL(SQL_DROP_TABLE_INSTRUCTION);
         onCreate(db);
     }
+
+    public static FoodDailyDatabase getInstance(Context context) {
+        return new FoodDailyDatabase(context);
+    }
 }
